@@ -37,6 +37,7 @@ namespace Permission.Api
 
             apiInstallers.ForEach(installer => installer.InstallServices(services, Configuration));
             installers.ForEach(installer => installer.InstallServices(services, Configuration));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +47,8 @@ namespace Permission.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(op => op.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
@@ -58,7 +61,6 @@ namespace Permission.Api
                 endpoints.MapControllers();
             });
 
-            app.UseCors(op => op.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 
         }
     }
